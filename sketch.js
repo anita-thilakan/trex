@@ -39,6 +39,7 @@ function preload(){
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  // frameRate(60)
   
   sun = createSprite(width-50,100,10,10);
   sun.addAnimation("sun", sunAnimation);
@@ -94,10 +95,13 @@ function draw() {
     score = score + Math.round(getFrameRate()/60);
     ground.velocityX = -(6 + 3*score/100);
     
-    if((touches.length > 0 || keyDown("SPACE")) && trex.y  >= height-120) {
+    // as one touches the mobile screen touches array will get the coordinates
+    // condition for both mobile and laptop
+
+    if( ( touches.length > 0 || keyDown("SPACE") ) && trex.y  >= height-120) {
       jumpSound.play( )
       trex.velocityY = -10;
-       touches = [];
+       touches = []; // emptying the array 
     }
     
     trex.velocityY = trex.velocityY + 0.8
@@ -136,7 +140,12 @@ function draw() {
     //   reset();
     //   touches = []
     // }
+
+    // calculate distance  between restart sprite and the mouse
     dis = dist(restart.x,restart.y,mouseX,mouseY)
+
+    // if distance is less than 30 than we can approximately say that we are clicking on restart sprite,this is only a workaround for mobile and the condition for the laptop remains as it is
+    
     if( (dis<30 && touches.length > 0 )  || mousePressedOver(restart))
     {
         reset();
