@@ -137,7 +137,7 @@ function draw() {
     //   touches = []
     // }
     dis = dist(restart.x,restart.y,mouseX,mouseY)
-    if(dis<30 && (touches.length > 0 || mouseIsPressed))
+    if( (dis<30 && touches.length > 0 )  || mousePressedOver(restart))
     {
         reset();
         touches = []
